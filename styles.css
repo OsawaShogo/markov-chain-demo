@@ -132,7 +132,6 @@ input {
 }
 
 .intro-copy {
-  max-width: 590px;
   margin: 24px 0 0;
   color: var(--muted);
   font-size: 15px;
