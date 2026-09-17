@@ -32,7 +32,7 @@
             <div><p class="eyebrow">TRAINING DATA</p><h2>教師データ</h2></div>
           </div>
           <p class="helper">文章を <code>|</code> 区切りで入力してください。1行が1つの系列です。</p>
-          <textarea id="training-data" spellcheck="false" aria-label="教師データ">春|風|が|吹く|春|花|が|咲く|風|が|吹く|空|が|青い|花|が|咲く|春|空|が|青い</textarea>
+          <textarea id="training-data" spellcheck="false" aria-label="教師データ"></textarea>
           <div class="sample-row">
             <span>サンプル：</span>
             <button class="text-button" data-sample="poem">詩</button>
@@ -62,7 +62,7 @@
           <div class="output-box" aria-live="polite"><p id="output-text">生成するボタンを押すと、ここに文章が現れます。</p><span class="cursor" aria-hidden="true"></span></div>
           <div class="trace-row"><span class="trace-label">LAST PATH</span><div id="trace" class="trace" aria-label="最後に生成した経路"></div></div>
           <div class="visual-heading"><div><p class="eyebrow">LIVE GRAPH</p><h2>遷移図</h2></div><p class="graph-legend"><i class="legend-dot start"></i>start <i class="legend-dot common"></i>state <i class="legend-line"></i>transition</p></div>
-          <div class="graph-wrap"><svg id="graph" role="img" aria-label="トークン間の遷移図"></svg><div id="empty-graph" class="empty-graph">教師データを入力すると<br>ここにモデルが現れます。</div></div>
+          <div class="graph-wrap"><svg id="graph" role="img" aria-label="トークン間の遷移図"></svg><div id="empty-graph" class="empty-graph"></div></div>
           <div class="graph-footer"><span>円の大きさ = 出現回数</span><span>線の太さ = 遷移回数</span><span class="graph-count" id="graph-count"></span></div>
         </section>
       </section>
