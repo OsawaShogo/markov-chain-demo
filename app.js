@@ -1,7 +1,7 @@
 const samples = {
-  poem: '春|風|が|吹く|春|花|が|咲く|風|が|吹く|空|が|青い|花|が|咲く|春|空|が|青い',
-  cafe: '朝|カフェ|に|入る|コーヒー|を|注文する|窓|の|そば|に|座る|朝|コーヒー|を|飲む|本|を|開く|静かな|朝',
-  story: '小さな|町|に|古い|時計塔|が|あった|時計塔|の|下|に|猫|が|いた|ある日|町|に|旅人|が|来た|旅人|は|猫|と|出会った'
+  poem: '春|風|が|吹く|。\n春|花|が|咲く|。\n風|が|吹く。\n空|が|青い|。\n花|が|咲く|。\n春|空|が|青い|。',
+  cafe: '朝|カフェ|に|入|る|。\nコーヒー|を|注文|する|。\n|窓|の|そば|に|座|る|。\n朝|コーヒー|を|飲む|。\n本|を|開く|。\n静か|な|朝|。',
+  story: '小さな|町|に|古い|時計|塔|が|あった|。\n時計|塔|の|下|に|猫|が|いた|。\nある|日|町|に|旅人|が|来た|。\n旅人|は|猫|と|出会った|。'
 };
 
 const dataInput = document.querySelector('#training-data');
@@ -171,3 +171,5 @@ document.querySelectorAll('[data-sample]').forEach(button => button.addEventList
 }));
 window.addEventListener('resize', drawGraph);
 buildModel();
+
+dataInput.value = samples.poem;
