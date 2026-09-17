@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="トークンの遷移から文章を生成する一次マルコフ連鎖デモ">
+  <title>Markov / 一次マルコフ連鎖デモ</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="./">
+        <span class="brand-mark" aria-hidden="true">↗</span>
+        <span><strong>MARKOV</strong><small>FIRST-ORDER LAB</small></span>
+      </a>
+      <div class="topbar-note"><span class="status-dot"></span> browser-only / no data sent</div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <p class="eyebrow">TOKENS → TRANSITIONS → TEXT</p>
+        <h1>次の一語を、<em>確率</em>で選ぶ。</h1>
+        <p class="intro-copy">トークンの並びから「この語の次に、どの語が来やすいか」を学習。小さなモデルの動きを、生成された文章と遷移図で同時に観察できます。</p>
+      </section>
+
+      <section class="workspace" aria-label="マルコフ連鎖デモ">
+        <aside class="control-panel panel">
+          <div class="panel-heading">
+            <span class="section-number">01</span>
+            <div><p class="eyebrow">TRAINING DATA</p><h2>教師データ</h2></div>
+          </div>
+          <p class="helper">文章を <code>|</code> 区切りで入力してください。1行が1つの系列です。</p>
+          <textarea id="training-data" spellcheck="false" aria-label="教師データ">春|風|が|吹く|春|花|が|咲く|風|が|吹く|空|が|青い|花|が|咲く|春|空|が|青い</textarea>
+          <div class="sample-row">
+            <span>サンプル：</span>
+            <button class="text-button" data-sample="poem">詩</button>
+            <button class="text-button" data-sample="cafe">カフェ日記</button>
+            <button class="text-button" data-sample="story">物語</button>
+          </div>
+          <div class="model-stats" aria-live="polite">
+            <div><strong id="token-count">0</strong><span>tokens</span></div>
+            <div><strong id="state-count">0</strong><span>states</span></div>
+            <div><strong id="transition-count">0</strong><span>links</span></div>
+          </div>
+          <div class="panel-heading generation-heading">
+            <span class="section-number">02</span>
+            <div><p class="eyebrow">GENERATION</p><h2>文章を生成</h2></div>
+          </div>
+          <label class="range-label" for="length"><span>生成するトークン数</span><output id="length-value" for="length">14</output></label>
+          <input id="length" type="range" min="3" max="40" value="14">
+          <button id="generate" class="generate-button"><span>生成する</span><span aria-hidden="true">↗</span></button>
+          <p class="shortcut-hint">ヒント：同じデータでも、生成するたびに結果が変わります。</p>
+        </aside>
+
+        <section class="result-panel panel">
+          <div class="panel-heading result-heading">
+            <div><p class="eyebrow">OUTPUT / <span id="model-status">READY</span></p><h2>生成された文章</h2></div>
+            <span class="formula">P(next | current)</span>
+          </div>
+          <div class="output-box" aria-live="polite"><p id="output-text">生成するボタンを押すと、ここに文章が現れます。</p><span class="cursor" aria-hidden="true"></span></div>
+          <div class="trace-row"><span class="trace-label">LAST PATH</span><div id="trace" class="trace" aria-label="最後に生成した経路"></div></div>
+          <div class="visual-heading"><div><p class="eyebrow">LIVE GRAPH</p><h2>遷移図</h2></div><p class="graph-legend"><i class="legend-dot start"></i>start <i class="legend-dot common"></i>state <i class="legend-line"></i>transition</p></div>
+          <div class="graph-wrap"><svg id="graph" role="img" aria-label="トークン間の遷移図"></svg><div id="empty-graph" class="empty-graph">教師データを入力すると<br>ここにモデルが現れます。</div></div>
+          <div class="graph-footer"><span>円の大きさ = 出現回数</span><span>線の太さ = 遷移回数</span><span class="graph-count" id="graph-count"></span></div>
+        </section>
+      </section>
+    </main>
+    <footer><span>FIRST-ORDER MARKOV CHAIN</span><span>各トークンは直前の1トークンだけを見て次を選択します。</span></footer>
+  </div>
+</body>
+</html>
